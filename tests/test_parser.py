@@ -15,3 +15,33 @@ class TestParser(unittest.TestCase):
         with patch.object(sys, 'argv', ['program', '--principal', '100000']):
             result = parse_commandline.parse_commandline()
         self.assertEqual(100000, result.principal)
+
+    def test_term_1(self):
+        with patch.object(sys, 'argv', ['program', '--term', '15y']):
+            result = parse_commandline.parse_commandline()
+        self.assertEqual(15 * 12, result.term)
+
+    def test_term_2(self):
+        with patch.object(sys, 'argv', ['program', '--term', '15years']):
+            result = parse_commandline.parse_commandline()
+        self.assertEqual(15 * 12, result.term)
+
+    def test_term_3(self):
+        with patch.object(sys, 'argv', ['program', '--term', '15m']):
+            result = parse_commandline.parse_commandline()
+        self.assertEqual(15, result.term)
+
+    def test_term_4(self):
+        with patch.object(sys, 'argv', ['program', '--term', '15months']):
+            result = parse_commandline.parse_commandline()
+        self.assertEqual(15, result.term)
+
+    def test_term_5(self):
+        with patch.object(sys, 'argv', ['program', '--term', '15']):
+            result = parse_commandline.parse_commandline()
+        self.assertEqual(15, result.term)
+
+    def test_term_6(self):
+        with patch.object(sys, 'argv', ['program', '--term', 'illegal']):
+            with self.assertRaises(Exception):
+                result = parse_commandline.parse_commandline()
