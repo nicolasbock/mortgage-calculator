@@ -5,7 +5,7 @@ import re
 term_unit_re = re.compile(r"^([0-9]+)(y(ears)?|m(onths)?)?$")
 
 
-def parse_commandline():
+def parse_commandline() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--principal",
