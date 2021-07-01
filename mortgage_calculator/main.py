@@ -4,7 +4,8 @@ from mortgage_calculator.loan import Loan
 
 def main():
     options = parse_commandline()
-    loan: Loan = Loan()
+    loan: Loan = Loan(principal=options.principal, term=options.term,
+                      rate=options.rate)
 
 
 if __name__ == "__main__":
