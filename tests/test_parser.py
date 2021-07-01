@@ -45,3 +45,8 @@ class TestParser(unittest.TestCase):
         with patch.object(sys, 'argv', ['program', '--term', 'illegal']):
             with self.assertRaises(Exception):
                 result = parse_commandline.parse_commandline()
+
+    def test_rate(self):
+        with patch.object(sys, 'argv', ['program', '--rate', '4.25']):
+            result = parse_commandline.parse_commandline()
+        self.assertEqual(4.25, result.rate)
