@@ -30,6 +30,8 @@ jobs:
         pip install --upgrade pip
         pip install tox
     - name: Lint
-      run: tox -e pep8
+      run: tox -e lint
+    - name: Check types
+      run: tox -e types
     - name: Build and Test
       run: tox -e py3
