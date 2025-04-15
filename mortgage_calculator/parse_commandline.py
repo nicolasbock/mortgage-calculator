@@ -25,7 +25,7 @@ def parse_commandline() -> argparse.Namespace:
         metavar="R",
         type=float,
         help="The interest rate as a percentage of the principal",
-        default=0)
+        default=1.0)
     options = parser.parse_args()
 
     options.principal = int(options.principal)
