@@ -24,15 +24,15 @@ class Loan(object):
         self.r = 1 + self.rate
 
         if self.rate > 0:
-            temp = self.r**self.term
-            self.payment = self.principal * self.rate * temp / (temp - 1)
+            self.payment = self.principal * self.rate * self.r**self.term / (self.r**self.term - 1)
             self.amortization = [
                 {
                     "month": i,
                     "interest": 0,
-                    "principal": (self.principal * self.r**i
-                                  - self.payment * (self.r**i - 1)
-                                  / (self.r - 1))
+                    "principal": 1,
+                    "balance": (self.principal * self.r**i
+                                - self.payment * (self.r**i - 1)
+                                / (self.r - 1))
                 }
                 for i in range(self.term + 1)
             ]
@@ -42,7 +42,8 @@ class Loan(object):
                 {
                     "month": i,
                     "interest": 0,
-                    "principal": self.principal - self.payment * i
+                    "principal": 0,
+                    "balance": self.principal - self.payment * i
                 }
                 for i in range(self.term + 1)]
 
